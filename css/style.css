@@ -1,0 +1,127 @@
+/* Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Ancizar Serif";
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  background-color: #fffcf2;
+  font-size: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Index */
+
+/* Haut */
+.header {
+  margin: 1rem 2rem;
+}
+
+.navBar {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.navBarOptions {
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  gap:1em;
+}
+
+#downloadBtn {
+  padding: 0.5rem 1rem;
+  background-color: #da7756;
+  color: #fcfbf7;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.75em;
+}
+
+#name {
+  font-size: 1.25em;
+}
+
+/* Milieu */
+#mainIntro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex: 1;
+}
+
+.midPartIntro {
+  display: flex;
+  align-items: center;
+}
+
+#faceImage {
+  width: 250px;
+  height: 250px;
+}
+
+#aboutMe {
+  background-color: #fcfbf7;
+  border: 1px solid black;
+  padding: 1em 1em;
+}
+
+/* Bas */
+.footer {
+  margin: 1rem 2rem;
+}
+
+.socialLinks {
+  display: flex;
+  justify-content: space-around;
+
+  margin-top: 0.75rem;
+}
+
+.socialLinks a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  font-size: 0.75rem;
+}
+
+.socialLinks img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Projets */
+
+.mainContentSection{
+  background-color: #faf8f0;
+  margin: 1rem 2rem;
+  padding: 1rem 2rem;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.mainContentSectionHeader{
+  display: flex;
+  justify-content: space-between;
+}
