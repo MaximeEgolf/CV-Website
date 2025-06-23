@@ -4,11 +4,13 @@ button.onclick = () => {
   fetch('http://localhost:3000/api/hello')
       .then(response => response.json())
       .then(data => {
+        console.log("response good");
           document.getElementById('result').innerHTML =
-              '<p>Response: ' + data.message + '</p>';
+              '<p>' + data.message + '</p>';
       })
       .catch(error => {
+        console.log("error");
           document.getElementById('result').innerHTML =
-              '<p>Error: ' + error + '</p>';
+              '<p>' + error + '</p>';
       });
 }

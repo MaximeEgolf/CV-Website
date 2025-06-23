@@ -35,7 +35,7 @@ a {
 
 /* Haut */
 .header {
-  margin: 1em 2em;
+  margin: 1em 2em 0em 2em;
 }
 
 .navBar {
@@ -75,7 +75,7 @@ a {
 
   background-color: var(--normal-beige);
   border-radius: 2em;
-  margin: 0em 2em;
+  margin: 2em 2em;
 }
 
 .midPartIntro {
@@ -99,7 +99,7 @@ a {
 /* Bas */
 .footer {
   background-color: #fffcf2;
-  padding: 1em 2em;
+  margin: 0em 2em 1em 2em;
 }
 
 .socialLinks {
@@ -121,16 +121,17 @@ a {
   height: 1.5rem;
 }
 
-/* Projets */
+/* Error */
 
-.mainContentSection{
-  margin: 1em 2em;
-  padding: 1em 2em;
-  border: 1px solid black;
-  border-radius: 5px;
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 1em;
 }
 
-.mainContentSectionHeader{
-  display: flex;
-  justify-content: space-between;
+.error h1 {
+  font-size: 5em;
 }
