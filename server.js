@@ -33,7 +33,6 @@ const ERROR_MESSAGE = {
   504: 'Délai d\'attente de la passerelle - Le serveur distant ne répond pas'
 };
 
-// Content-Type
 function getContentType(filePath){
   let ext = path.extname(filePath);
   return MIME_TYPES[ext] || 'text/plain';
@@ -47,7 +46,6 @@ function getMessageFromStatus(statusCode){
 function errorPage(res, statusCode){
   const errorFilePath = path.join(__dirname, 'public', 'error.html');
   fs.readFile(errorFilePath, 'utf8', (error, data) => {
-
     if (error)
     {
       res.writeHead(statusCode, {'Content-Type': 'text/html'});
@@ -57,7 +55,6 @@ function errorPage(res, statusCode){
     {
       const newData = data.replace('${status-code}', statusCode)
                           .replace('${error-message}', getMessageFromStatus(statusCode));
-
       const contentType = getContentType(errorFilePath);
       res.writeHead(200, {'Content-Type': contentType});
       res.end(newData);
@@ -73,18 +70,16 @@ const server = http.createServer(async (req, res) => {
   let requestPath = req.url;
 
   if (req.method === 'GET') {
-    // Get request
     if (req.url === '/') {
       requestPath = 'homepage.html';
     }
     else if (requestPath == '/api/github') {
       const githubRes = await github(process.env.USER);
       res.writeHead(200, {'Content-Type': 'application/json'});
-      res.end(JSON.stringify({message: 'Github', data: githubRes}));
+      res.end(JSON.stringify({from: requestPath, value: githubRes}));
       return;
     }
 
-    // Show file content
     const filePath = path.join(__dirname, 'public', requestPath);
     fs.readFile(filePath, (error, data) => {
       if (error) {
@@ -98,7 +93,7 @@ const server = http.createServer(async (req, res) => {
     })
   }
   else {
-    errorPage(res, 500);
+    errorPage(res, 405);
   }
 });
 
