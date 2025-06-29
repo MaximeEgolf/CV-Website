@@ -1,7 +1,11 @@
-const http = require('http');
-const path = require('path');
-const fs = require('fs');
-const { stat } = require('fs/promises');
+import http from 'http';
+import path from 'path';
+import fs from 'fs';
+import url from 'url';
+import {github} from './api.js';
+
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Constants
 const PORT = process.env.PORT;
@@ -52,7 +56,8 @@ function errorPage(res, statusCode){
     else
     {
       const newData = data.replace('${status-code}', statusCode)
-                        .replace('${error-message}', getMessageFromStatus(statusCode));
+                          .replace('${error-message}', getMessageFromStatus(statusCode));
+
       const contentType = getContentType(errorFilePath);
       res.writeHead(200, {'Content-Type': contentType});
       res.end(newData);
@@ -61,19 +66,21 @@ function errorPage(res, statusCode){
 }
 
 // Server
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
+  let requestPath = req.url;
+
   if (req.method === 'GET') {
     // Get request
-    let requestPath = req.url;
     if (req.url === '/') {
       requestPath = 'homepage.html';
     }
-    else if (requestPath === '/api/hello') {
-      res.writeHead(200, {'Content-Type': 'application/json'})
-      res.end(JSON.stringify({message: 'Called api/hello'}));
+    else if (requestPath == '/api/github') {
+      const githubRes = await github(process.env.USER);
+      res.writeHead(200, {'Content-Type': 'application/json'});
+      res.end(JSON.stringify({message: 'Github', data: githubRes}));
       return;
     }
 
@@ -91,7 +98,7 @@ const server = http.createServer((req, res) => {
     })
   }
   else {
-    errorPage(res, 500, );
+    errorPage(res, 500);
   }
 });
 
