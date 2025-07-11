@@ -74,7 +74,7 @@ const server = http.createServer(async (req, res) => {
       requestPath = 'homepage.html';
     }
     else if (requestPath == '/api/github') {
-      const githubRes = await github(process.env.USER);
+      const githubRes = await github(process.env.USER, process.env.GITHUB_TOKEN);
       res.writeHead(200, {'Content-Type': 'application/json'});
       res.end(JSON.stringify({from: requestPath, value: githubRes}));
       return;
