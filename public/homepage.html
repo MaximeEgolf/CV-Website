@@ -7,57 +7,45 @@
   <!-- style.css -->
   <link rel="stylesheet" href="./css/style.css">
 
-  <!-- Ancizar Serif(Google Fonts) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Ancizar+Serif:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css'>
   <title>Maxime Egolf</title>
 </head>
 <body>
 
   <header class="header">
-    <nav class="navBar">
-      <a id="name" href="/">Maxime Egolf</a>
-      <div class="navBarOptions">
-        <a href="./project.html">Projets</a>
-        <a href="./contact.html">Contacts</a>
-        <a id="downloadBtn" href="./cv/CV_MaximeEgolf_fr.pdf" download>Télécharger le CV</a>
-      </div>
-    </nav>
+    <div>
+      <a href="/">megolf@curriculumvitae:~$</a>
+      <input type="text" id="typeInput" autocomplete="off" autofocus/>
+    </div>
+    <a class="btn btn-little">fr</a>
   </header>
+  <hr>
 
   <main class="main">
-    <section class="midPartIntro">
-      <img id="faceImage" src="./images/UserLogo.png">
-      <div id="aboutMe">
-        <h3>À propos de moi</h3>
-        <p>Dis des trucs sérieux ici</p>
+    <div class="intro">
+      <div class="presentation">
+        <img id="user" src="./images/UserLogo.png">
+        <p>Écrire des trucs pertinents pour une fois dans ma vie</p>
       </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="socialLinks">
-      <a href="https://www.facebook.com/maxime.egolf" target="_blank">
-        <img src="./images/FacebookLogo_64px_BLACK.png">
-        <span>Facebook</span>
-      </a>
-
-      <a href="https://www.linkedin.com/in/maxime-egolf-476941233" target="_blank">
-        <img src="./images/LinkedInLogo_64px_BLACK.png">
-        <span>LinkedIn</span>
-      </a>
-
-      <a href="https://github.com/MaximeEgolf" target="_blank">
-        <img src="./images/GithubLogo_64px_BLACK.png">
-        <span>GitHub</span>
-      </a>
-
-      <div>
-        <a href="mailto:maxegolf3@gmail.com">maxegolf3@gmail.com</a>
-        <a href="mailto:Maxime.Egolf@usherbrooke.com">Maxime.Egolf@usherbrooke.ca</a>
+      <div class="btn-group">
+        <a class="btn btn-big directory" href="./about.html">Informations</a>
+        <a class="btn btn-big directory" href="./project.html">Projects</a>
+        <a class="btn btn-big directory" href="./contact.html">Contacts</a>
+        <a class="btn btn-big file" href="./cv/CV_MaximeEgolf_fr.pdf" download>CV.pdf</a>
       </div>
     </div>
+  </main>
+
+  <hr>
+  <footer class="footer">
+    <div class="social-links">
+      <a href="https://www.facebook.com/maxime.egolf" target="_blank">[facebook]</a>
+      <a href="https://www.linkedin.com/in/maxime-egolf-476941233" target="_blank">[linkedin]</a>
+      <a href="https://github.com/MaximeEgolf" target="_blank">[github]</a>
+      <a href="mailto:maxegolf3@gmail.com">[maxegolf3@gmail.com]</a>
+    </div>
+    <p>© 2025 Maxime Egolf</p>
   </footer>
+
 </body>
 </html>
