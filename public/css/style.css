@@ -23,7 +23,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
 
-  font-family: "Hack", "monospace";
+  font-family: Hack, monospace;
   font-size: 1rem;
   color: var(--white);
   background-color: var(--black);
@@ -34,92 +34,7 @@ a {
   color: inherit;
 }
 
-/* Specific */
-.header {
-  display:flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 1em 2em;
-  color: var(--white);
-  background-color: var(--light-grey);
-}
-
-.header input {
-  font-family: "Hack", "monospace";
-  background: transparent;
-  caret-color: var(--white);
-  color: var(--white);
-  border: none;
-  outline: none;
-
-  font-size: 1rem;
-  line-height: 1.5;
-  padding: 0;
-  height: auto;
-}
-
-
-.main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  flex: 1;
-}
-
-.intro {
-  display: flex;
-  align-items: center;
-  border-radius: 1em;
-
-  padding: 1.5em 1.5em;
-  gap: 1em;
-  background-color: var(--light-grey);
-}
-
-.presentation {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  gap: 1em;
-}
-
-.presentation p {
-  width: 35ch;
-}
-
-#user {
-  border-radius: 50%;
-  width: 150px;
-  height: 150px;
-}
-
-.btn-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-}
-
-.footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-
-  padding: 1em 2em;
-  font-size:1rem;
-
-  background-color: var(--light-grey);
-}
-
-.social-links {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
+/* General */
 .directory
 {
   border-color: var(--blue);
@@ -139,12 +54,114 @@ a {
 }
 
 .btn-little {
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 0.5rem;
   font-size: 0.75rem;
 }
+
 .btn-big {
   padding: 1rem 2rem;
   font-size: 1rem;
+}
+
+/* Specific */
+.header {
+  position: sticky;
+  width: 100%;
+  top: 0;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+
+  padding: 1em 2em;
+  background-color: var(--light-grey);
+}
+
+.header-content input {
+  font-family: "Hack", "monospace";
+  font-size: 1rem;
+
+  background: transparent;
+  border: none;
+  outline: none;
+  line-height: 1.0;
+
+  caret-color: var(--white);
+  color: var(--white);
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
+}
+
+.intro {
+  display: flex;
+  align-items: center;
+
+  gap: 1em;
+  border-radius: 1em;
+  padding: 1.5em 1.5em;
+  background-color: var(--light-grey);
+}
+
+.presentation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 1em;
+  width: 35ch;
+}
+
+#user {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+#projects {
+  display: flex;
+  flex-direction: column;
+}
+
+.project {
+  width: 55ch;
+
+  margin: 1em 1em;
+  padding: 2em 2em;
+  border-radius: 1em;
+
+  background-color: var(--light-grey);
+}
+
+.projectHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  padding: 1em 2em;
+  background-color: var(--light-grey);
 }
 
 .error {
@@ -158,11 +175,4 @@ a {
 
 .error h1 {
   font-size: 5rem;
-}
-
-.project {
-  background-color: var(--dark-beige);
-}
-
-.projectHeader {
 }
