@@ -1,9 +1,9 @@
 /* Base */
 :root {
   --black: #1a1a1a;
-  --light-grey: #2D2D2D;
+  --light-grey: #2d2d2d;
   --dark-grey: #212121;
-  --white: white;
+  --white: #ffffff;
   --green:#55dd55;
   --blue: #3366cc;
 }
@@ -35,15 +35,13 @@ a {
 }
 
 /* General */
-.directory
+.color-blue
 {
-  border-color: var(--blue);
   color: var(--blue);
 }
 
-.file
+.color-green
 {
-  border-color: var(--green);
   color: var(--green);
 }
 
