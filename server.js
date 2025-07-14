@@ -70,10 +70,10 @@ const server = http.createServer(async (req, res) => {
   let requestPath = req.url;
 
   if (req.method === 'GET') {
-    if (req.url === '/') {
+    if (requestPath === '/') {
       requestPath = 'homepage.html';
     }
-    else if (requestPath == '/api/github') {
+    else if (requestPath === '/api/github') {
       const githubRes = await github(process.env.USER, process.env.GITHUB_TOKEN);
       res.writeHead(200, {'Content-Type': 'application/json'});
       res.end(JSON.stringify({from: requestPath, value: githubRes}));
@@ -91,6 +91,18 @@ const server = http.createServer(async (req, res) => {
         res.end(data);
       }
     })
+  }
+  else if (req.method === "POST")
+  {
+    if (requestPath === "/api/cd")
+    {
+      // TO DO
+      // get the body message!
+
+      res.writeHead(200, {'Content-Type': 'application/json'});
+      res.end(JSON.stringify({from: requestPath, value: "TODO" }));
+      return;
+    }
   }
   else {
     errorPage(res, 405);

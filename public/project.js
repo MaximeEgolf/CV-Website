@@ -30,7 +30,7 @@ async function gitHubApiCall() {
     }
   }
   catch (error) {
-    throw new Error(error);
+    console.error(error);
   }
 }
 

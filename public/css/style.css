@@ -23,7 +23,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
 
-  font-family: Hack, monospace;
+  font-family: "Hack", "monospace";
   font-size: 1rem;
   color: var(--white);
   background-color: var(--black);
@@ -47,18 +47,18 @@ a {
 
 .btn {
   border: 1px solid;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   background-color: var(--dark-grey);
 }
 
 .btn-little {
-  padding: 0.25rem 0.5rem;
   font-size: 0.75rem;
+  padding: 0.25em 0.50em;
 }
 
 .btn-big {
-  padding: 1rem 2rem;
   font-size: 1rem;
+  padding: 1em 2em;
 }
 
 /* Specific */
@@ -66,6 +66,7 @@ a {
   position: sticky;
   width: 100%;
   top: 0;
+  z-index: 100;
 }
 
 .header-content {
@@ -80,7 +81,7 @@ a {
 }
 
 .header-content input {
-  font-family: "Hack", "monospace";
+  font-family: inherit;
   font-size: 1rem;
 
   background: transparent;
@@ -90,6 +91,11 @@ a {
 
   caret-color: var(--white);
   color: var(--white);
+}
+
+@media (max-width:600px)
+{
+
 }
 
 .main {
