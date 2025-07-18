@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "cv-website",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node --env-file=.env server.js",
@@ -17,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/MaximeEgolf/CVWebsite/issues"
   },
-  "homepage": "https://github.com/MaximeEgolf/CVWebsite#readme"
+  "homepage": "https://github.com/MaximeEgolf/CVWebsite#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
