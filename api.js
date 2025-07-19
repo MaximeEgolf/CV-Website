@@ -3,23 +3,17 @@
 // -----------------------------------------
 async function userGithubRepos(user, token){
   try {
-    const reposRes = await githubFetch(`https://api.github.com/users/${user}/repos?sort=updated&direction=desc`,
-                                      token);
+    const reposRes = await githubFetch(`https://api.github.com/users/${user}/repos?sort=updated&direction=desc`, token);
     const reposResJson = await reposRes.json();
 
     const repoData = [];
     for (const repo of reposResJson) {
-      // Languages
-      const languageRes = await githubFetch(`https://api.github.com/repos/${user}/${repo.name}/languages`,
-                                            token);
+      const languageRes = await githubFetch(`https://api.github.com/repos/${user}/${repo.name}/languages`, token);
       const languageResJson = await languageRes.json();
 
-      // ReadME
-      const readMeRes = await githubFetch(`https://api.github.com/repos/${user}/${repo.name}/readme`,
-                                          token,
-                                          {'Accept': 'application/vnd.github.html'});
+      const readMeRes = await githubFetch(`https://api.github.com/repos/${user}/${repo.name}/readme`, token, {'Accept': 'application/vnd.github.html'});
       const readMeResHtml = await readMeRes.text();
-      // JSON
+
       repoData.push({
         name: repo.name,
         date: repo.pushed_at,
@@ -65,20 +59,50 @@ const HTMLname =
 }
 
 function commandLine(req){
-    const fromHtml = req.body.from;
-    let result = true;
+  const command = req.body.command;
+  const argument = req.body.argument;
+  const currentDir = req.body.currentDir;
 
-    const toHtml = HTMLname[req.body.to];
-    if (typeof toHtml === 'undefined')
-      result = false;
+  let res = undefined;
 
-    if (!result || !HTMLredirection[fromHtml].includes(toHtml))
-      result = false;
+  switch (command)
+  {
+    case "pwd":
+      res = pwd(currentDir);
+      break;
+    case "cd":
+      res = cd(argument, currentDir);
+      break;
+    case "ls":
+      res = ls(currentDir);
+      break;
+  }
 
-    return {
-      toHtml : toHtml,
-      result : result
-    };
+  return res;
+}
+
+function cd(argument, currentDir){
+  let result = true;
+
+  const to = HTMLname[argument];
+  if (typeof to === 'undefined')
+    result = false;
+
+  if (!result || !HTMLredirection[currentDir].includes(to))
+    result = false;
+
+  return {
+    toHtml : to,
+    result : result
+  };
+}
+
+function ls(currentDir){
+
+}
+
+function pwd(currentDir){
+
 }
 
 export {

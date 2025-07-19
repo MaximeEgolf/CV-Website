@@ -1,26 +1,41 @@
-const cmd = document.getElementById("cmdInput");
+const cmdInput = document.getElementById("cmdInput");
 
-cmd.addEventListener('blur', () => {
-  cmd.focus();
+cmdInput.addEventListener('blur', () => {
+  cmdInput.focus();
 });
 
-cmd.addEventListener('keydown', async (event) => {
+cmdInput.addEventListener('keydown', async (event) => {
   if (event.key === "Enter")
   {
-    console.log(window.location.pathname);
-    console.log(cmd.value);
+    const cmdWords = cmdInput.value.split(' ');
+    console.log(cmdWords);
+    const cmdFirstWord = cmdWords[0];
+    const cmdSecondWord = cmdWords[1];
+    let verification = true;
 
-    const res = await fetch('http://localhost:3000/api/commandLine', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ from: window.location.pathname, to: cmd.value})
-    });
+    if (cmdWords.length > 2)
+      verification = false;
 
-    const resJson = await res.json();
+    if (!verification || !(cmdFirstWord === "pwd" || cmdFirstWord === "cd"  || cmdFirstWord === "ls"))
+      verification = false;
 
-    if (resJson.valid)
-      window.location.href = resJson.path;
+    if (verification)
+    {
+      const res = await fetch('http://localhost:3000/api/commandLine', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ command: cmdFirstWord,
+                               argument: cmdSecondWord,
+                               currentDir: window.location.pathname,
+                            })
+      });
 
-    cmd.value = '';
+      const resJson = await res.json();
+
+      if (cmdFirstWord === "cd" && resJson.valid)
+        window.location.href = resJson.path;
+    }
+
+    cmdInput.value = '';
   }
 });
