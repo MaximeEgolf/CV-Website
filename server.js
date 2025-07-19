@@ -28,7 +28,7 @@ app.get("/api/github", async (req, res) =>
 app.post("/api/commandLine", (req, res) =>
 {
   const cmdLineRes = cmdLine(req);
-  res.json({ path: cmdLineRes.toHtml, valid: cmdLineRes.result });
+  res.json({ result: cmdLineRes.result, success: cmdLineRes.success });
 });
 
 app.use((req, res, next) => {

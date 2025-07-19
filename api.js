@@ -44,19 +44,26 @@ async function githubFetch(request, token, otherheaders = {}){
 // -----------------------------------------
 // Command Line
 // -----------------------------------------
-const HTMLredirection =
-{
-  '/' : ['/project.html', '/contact.html'],
-  '/project.html' : ['/'],
-  '/contact.html' : ['/']
-}
-
-const HTMLname =
-{
-  '~' : '/',
-  'Projets' : '/project.html',
-  'Contacts' : '/contact.html'
-}
+const PAGES = {
+  '/': {
+    name: 'Home',
+    parent: null,
+    child: ['/project.html', '/contact.html'],
+    aliases: ['Home', '~']
+  },
+  '/project.html': {
+    name: 'Projets',
+    parent: '/',
+    child: null,
+    aliases: ['Projets', 'project.html']
+  },
+  '/contact.html': {
+    name: 'Contacts',
+    parent: '/',
+    child: null,
+    aliases: ['Contacts', 'contact.html']
+  }
+};
 
 function commandLine(req){
   const command = req.body.command;
@@ -77,32 +84,75 @@ function commandLine(req){
       res = ls(currentDir);
       break;
   }
-
   return res;
 }
 
 function cd(argument, currentDir){
-  let result = true;
+  const page = PAGES[currentDir];
+  let path = null;
 
-  const to = HTMLname[argument];
-  if (typeof to === 'undefined')
-    result = false;
+  if (argument === '~')
+    path = '/';
+  if (argument === '..')
+    path = page.parent;
 
-  if (!result || !HTMLredirection[currentDir].includes(to))
-    result = false;
+  if (path === null && page.child !== null)
+  {
+    for (const dest of page.child) {
+      const aliases = PAGES[dest].aliases;
+      if (aliases.includes(argument))
+      {
+        path = dest;
+        break;
+      }
+    }
+  }
 
   return {
-    toHtml : to,
-    result : result
+    result : path,
+    success : path === null ? false : true
   };
 }
 
 function ls(currentDir){
+  const page = PAGES[currentDir];
+  let childDir = [];
 
+  if (page.parent !== null)
+  {
+    childDir.push('..');
+  }
+
+  if (page.child !== null)
+  {
+    for (const dest of page.child) {
+      const name = PAGES[dest].name;
+      childDir.push(name);
+    }
+  }
+
+  return  {
+    result: childDir,
+    success: childDir.length === 0 ? false : true
+  }
 }
 
 function pwd(currentDir){
+  let page = PAGES[currentDir];
+  let path = '';
 
+  while (page.name !== 'Home')
+  {
+    path = page.name + '/' + path;
+    page = PAGES[page.parent];
+  }
+
+  path = page.name + '/' + path;
+
+  return {
+    result: path,
+    success: true
+  }
 }
 
 export {

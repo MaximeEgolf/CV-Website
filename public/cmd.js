@@ -8,7 +8,6 @@ cmdInput.addEventListener('keydown', async (event) => {
   if (event.key === "Enter")
   {
     const cmdWords = cmdInput.value.split(' ');
-    console.log(cmdWords);
     const cmdFirstWord = cmdWords[0];
     const cmdSecondWord = cmdWords[1];
     let verification = true;
@@ -32,10 +31,24 @@ cmdInput.addEventListener('keydown', async (event) => {
 
       const resJson = await res.json();
 
-      if (cmdFirstWord === "cd" && resJson.valid)
-        window.location.href = resJson.path;
-    }
+      if (resJson.success)
+      {
+        switch (cmdFirstWord)
+        {
+          case "cd":
+            window.location.href = resJson.result;
+            break;
 
+          case "ls":
+            console.log(resJson.result);
+            break;
+
+          case "pwd":
+            console.log(resJson.result);
+            break;
+        }
+      }
+    }
     cmdInput.value = '';
   }
 });
