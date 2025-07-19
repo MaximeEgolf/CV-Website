@@ -1,3 +1,6 @@
+// -----------------------------------------
+// Github
+// -----------------------------------------
 async function userGithubRepos(user, token){
   try {
     const reposRes = await githubFetch(`https://api.github.com/users/${user}/repos?sort=updated&direction=desc`,
@@ -44,6 +47,41 @@ async function githubFetch(request, token, otherheaders = {}){
   )
 }
 
+// -----------------------------------------
+// Command Line
+// -----------------------------------------
+const HTMLredirection =
+{
+  '/' : ['/project.html', '/contact.html'],
+  '/project.html' : ['/'],
+  '/contact.html' : ['/']
+}
+
+const HTMLname =
+{
+  '~' : '/',
+  'Projets' : '/project.html',
+  'Contacts' : '/contact.html'
+}
+
+function commandLine(req){
+    const fromHtml = req.body.from;
+    let result = true;
+
+    const toHtml = HTMLname[req.body.to];
+    if (typeof toHtml === 'undefined')
+      result = false;
+
+    if (!result || !HTMLredirection[fromHtml].includes(toHtml))
+      result = false;
+
+    return {
+      toHtml : toHtml,
+      result : result
+    };
+}
+
 export {
-  userGithubRepos as github
+  userGithubRepos as github,
+  commandLine as cmdLine
 }

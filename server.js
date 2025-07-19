@@ -1,6 +1,6 @@
 import path from 'path';
 import url from 'url';
-import {github} from './api.js';
+import {github, cmdLine} from './api.js';
 
 import express from 'express';
 const app = express();
@@ -25,9 +25,10 @@ app.get("/api/github", async (req, res) =>
   res.json({from: req.path, value: githubRes});
 });
 
-app.post("/api/cd", (req, res) =>
+app.post("/api/commandLine", (req, res) =>
 {
-  res.redirect(`/${req.body.value}.html`);
+  const cmdLineRes = cmdLine(req);
+  res.json({ path: cmdLineRes.toHtml, valid: cmdLineRes.result });
 });
 
 app.use((req, res, next) => {
