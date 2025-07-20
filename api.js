@@ -48,20 +48,20 @@ const PAGES = {
   '/': {
     name: 'Home',
     parent: null,
-    child: ['/project.html', '/contact.html'],
+    child: ['/projects.html', '/contacts.html', 'cv.pdf'],
     aliases: ['Home', '~']
   },
-  '/project.html': {
+  '/projects.html': {
     name: 'Projets',
     parent: '/',
     child: null,
-    aliases: ['Projets', 'project.html']
+    aliases: ['Projets', 'projects.html']
   },
-  '/contact.html': {
+  '/contacts.html': {
     name: 'Contacts',
     parent: '/',
     child: null,
-    aliases: ['Contacts', 'contact.html']
+    aliases: ['Contacts', 'contacts.html']
   }
 };
 
@@ -99,11 +99,14 @@ function cd(argument, currentDir){
   if (path === null && page.child !== null)
   {
     for (const dest of page.child) {
-      const aliases = PAGES[dest].aliases;
-      if (aliases.includes(argument))
+      if (dest.endsWith('.html'))
       {
-        path = dest;
-        break;
+        const aliases = PAGES[dest].aliases;
+        if (aliases.includes(argument))
+        {
+          path = dest;
+          break;
+        }
       }
     }
   }
@@ -126,6 +129,11 @@ function ls(currentDir){
   if (page.child !== null)
   {
     for (const dest of page.child) {
+      if (!dest.endsWith('.html'))
+      {
+        childDir.push(dest);
+        break;
+      }
       const name = PAGES[dest].name;
       childDir.push(name);
     }

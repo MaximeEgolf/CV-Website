@@ -11,12 +11,15 @@ const __dirname = path.dirname(__filename);
 // Constants
 const PORT = process.env.PORT || 3000;
 
+app.set('view engine', 'ejs');
+app.set('views', './views');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'homepage.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.get("/api/github", async (req, res) =>
@@ -31,8 +34,11 @@ app.post("/api/commandLine", (req, res) =>
   res.json({ result: cmdLineRes.result, success: cmdLineRes.success });
 });
 
-app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, 'public', 'error.html'));
+app.use((req, res) => {
+  res.status(404).render('error', {
+    title: '404',
+    message: 'Cette page n\'a pas été trouvé'
+  });
 });
 
 app.listen(PORT, (error) => {

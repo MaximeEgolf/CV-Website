@@ -1,4 +1,5 @@
 const cmdInput = document.getElementById("cmdInput");
+const cmdResult = document.getElementById("cmdResult");
 
 cmdInput.addEventListener('blur', () => {
   cmdInput.focus();
@@ -28,7 +29,6 @@ cmdInput.addEventListener('keydown', async (event) => {
                                currentDir: window.location.pathname,
                             })
       });
-
       const resJson = await res.json();
 
       if (resJson.success)
@@ -40,11 +40,11 @@ cmdInput.addEventListener('keydown', async (event) => {
             break;
 
           case "ls":
-            console.log(resJson.result);
+            cmdResult.textContent = resJson.result;
             break;
 
           case "pwd":
-            console.log(resJson.result);
+            cmdResult.textContent = resJson.result;
             break;
         }
       }
